@@ -1,6 +1,6 @@
 import React from 'react';
 import TaskScreen from './src/screens/tasks/index';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView} from 'react-native';
 
 
 
@@ -16,8 +16,6 @@ const App= () => {
   );
 };
 
-const styles = StyleSheet.create({
-  
-});
+
 
 export default App;

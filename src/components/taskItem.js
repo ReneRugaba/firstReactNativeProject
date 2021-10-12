@@ -1,18 +1,28 @@
 import React from 'react'
-import { Image, View, Text, StyleSheet } from 'react-native'
+import { Image, View, Text, StyleSheet, Pressable } from 'react-native'
 
-const TaskItem=({task})=> {
+const TaskItem=({task, removeTask, validateTask})=> {
     return (
         <View style={styles.container}>
             <View style={styles.subContainer}>
-                <Image
-                    source={require('../../assets/icons/circle.png')}
-                />
-                <Text style={{marginLeft:16, fontSize:18, color:"black"}}>{task.title}</Text>
+                <Pressable onPress={()=>validateTask(task.id)}>
+                    {!task.isCompleted?
+                        <Image
+                        source={require('../../assets/icons/circle.png')}
+                        />
+                        :
+                        <Image
+                        source={require('../../assets/icons/circleWithValidation.png')}
+                         />
+                    }
+                </Pressable>
+                <Text style={{marginLeft:16, fontSize:18, color:!task.isCompleted?"black":"green"}}>{task.title}</Text>
             </View>
-            <Image
-                source={require('../../assets/icons/bin.png')}
-            />
+            <Pressable onPress={()=>removeTask(task.id)}>
+                <Image
+                    source={require('../../assets/icons/bin.png')}
+                />
+            </Pressable>
             
         </View>
     )
