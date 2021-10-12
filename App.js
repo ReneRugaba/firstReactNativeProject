@@ -10,7 +10,7 @@ import {SafeAreaView} from 'react-native';
 const App= () => {
   
   return (
-    <SafeAreaView >
+    <SafeAreaView style={{flex:1}} >
       <TaskScreen/>
     </SafeAreaView>
   );

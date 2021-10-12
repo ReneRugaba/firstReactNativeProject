@@ -24,7 +24,6 @@ const InputForm=({setArrayList})=> {
                 title='Ajouter'
                 onPress={onPresseButton}
                 color="blue"
-               
             />
         </View>
     )
