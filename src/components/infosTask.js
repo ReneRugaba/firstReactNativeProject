@@ -6,7 +6,7 @@ const InfosTask=({task})=> {
     return (
         <View style={Styles.container}>
             <Text style={Styles.text}>{`Nombre de tâches: ${task.length}`}</Text>
-            <Text style={Styles.text}>{`Tâches validé: ${task?.filter(item=>item.isCompleted===true).length}`}</Text>
+            <Text style={Styles.text}>{`Tâches validées: ${task?.filter(item=>item.isCompleted===true).length}`}</Text>
         </View>
     )
 }

@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from 'react'
-import { FlatList, Image, Pressable, Text, View, StyleSheet, Button } from 'react-native'
+import React, { useState } from 'react'
+import { FlatList, Image, Pressable, StyleSheet } from 'react-native'
+import { useSelector, useDispatch } from 'react-redux';
 import Headers from '../../components/header'
 import InfosTask from '../../components/infosTask';
 import TaskItem from '../../components/taskItem';
 import InputForm from './../../components/form/inputForm';
+import {toggleTask, deleteTask} from "./../../redux/actions/index"
+import { getTask } from './../../redux/celectors';
 
 export default function TaskScreen() {
 
-    const [arrayList, setArrayList] = useState([])
+
+    const arrayList = useSelector(getTask)
+    const dispatch = useDispatch()
+
     const [isVisible,setIsVisible] = useState(false)
-    const [taskCompted,setTaskCompted] = useState(0)
+    
     const validateTask = (id) =>{
-        setArrayList(
-            arrayList.map(item=>{
-                if(item.id === id){
-                    item.isCompleted=!item.isCompleted
-                }
-                return item
-            })
-        )
+
+        dispatch(toggleTask(id))
+
     }
 
     const changeFormStatus = () => {
@@ -26,22 +27,14 @@ export default function TaskScreen() {
     }
 
     const removeTask = async (id) =>{
-        setArrayList(arrayList.filter(item=>item.id !== id))
+        dispatch(deleteTask(id))
     }
 
     const renderItem = ({item}) => {
          return(<TaskItem validateTask={validateTask} removeTask={removeTask}  task={item}/>)
     }
 
-    const addTask = (title)=>{
-        if(title==="")return
-
-        setArrayList([...arrayList,{id:arrayList.length + 1,title:title, isCompleted:false}])
-    }
-
-  
-        // console.log(arrayList.filter((item)=>item.isCompleted===true))
-
+    
 
     return (
         <>
@@ -50,8 +43,8 @@ export default function TaskScreen() {
                 ListHeaderComponent={
                     <>
                         <Headers/>
-                        {isVisible && <InputForm  setArrayList={addTask}/>}
-                        <InfosTask task={arrayList} taskCompleted={taskCompted}/>
+                        {isVisible && <InputForm />}
+                        <InfosTask task={arrayList} />
                     </>
                 }
                 data={arrayList}

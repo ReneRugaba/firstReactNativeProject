@@ -1,15 +1,20 @@
 import React, {useState} from 'react'
 import { StyleSheet, TextInput, Button, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { addTask } from './../../redux/actions/index';
 
-const InputForm=({setArrayList})=> {
+
+const InputForm=()=> {
     const [text,setText] = useState("")
+    const dispatch = useDispatch()
 
     const onChangeText =(valueInput)=>{
         setText(valueInput)
     }
 
     const onPresseButton = () =>{
-        setArrayList(text)
+        dispatch(addTask(text))
+        // setArrayList(text)
         setText("")
     }
     return (
